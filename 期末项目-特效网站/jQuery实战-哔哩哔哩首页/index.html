@@ -1,0 +1,1166 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="utf-8">
+		<meta name="Author" content="lucas">
+		<link rel="stylesheet" href="css/style.css" type='text/css' />
+		<title>lucas'home</title>
+		<script type="text/javascript" src='js/jquery-1.12.1.min.js'></script>
+		<style type='text/css'>
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: 'Microsoft yahei';
+			}
+
+			#wrap {
+				width: 100%;
+				height: 540px;
+				min-width: 1000px;
+				margin: 20px auto 0;
+				position: relative;
+			}
+
+			#pic {
+				width: 870px;
+				height: 540px;
+				margin: 0 auto;
+				position: relative;
+			}
+
+			#pic ul li {
+				list-style: none;
+				background-size: cover;
+				width: 870px;
+				height: 540px;
+				position: absolute;
+				display: none;
+			}
+
+			#left,
+			#right {
+				width: 32px;
+				height: 63px;
+				cursor: pointer;
+				position: absolute;
+				top: 50%;
+				margin-top: -31px;
+			}
+
+			#left {
+				left: -32px;
+				background: url(img/arrow.jpg) top left;
+			}
+
+			#right {
+				right: -32px;
+				background: url(img/arrow.jpg) top right;
+			}
+
+			#tab {
+				width: 100%;
+				height: 100px;
+				border: 1px solid #ddd;
+				position: relative;
+				margin-top: 20px;
+			}
+
+			#tab #show {
+				padding: 0 30px;
+				height: 100px;
+				position: relative;
+				z-index: 2;
+			}
+
+			#tab #show div {
+				width: 100%;
+				height: 100px;
+				overflow: hidden;
+			}
+
+			#tab ul {
+				width: 10000%;
+				margin-left: 0;
+				position: relative;
+			}
+
+			#tab ul li {
+				width: 120px;
+				height: 75px;
+				margin: 11px 15px;
+				background-size: cover;
+				float: left;
+				list-style: none;
+			}
+
+			#prev,
+			#next {
+				width: 30px;
+				height: 100px;
+				border: 1px solid #ddd;
+				font-size: 30px;
+				font-weight: bold;
+				line-height: 100px;
+				text-align: center;
+				cursor: pointer;
+				color: #999;
+				position: absolute;
+				top: 0;
+				background: #fff;
+				z-index: 3;
+			}
+
+			#prev {
+				left: 0;
+			}
+
+			#next {
+				right: 0;
+			}
+
+			#prev:hover,
+			#next:hover {
+				background: #43A4EF;
+				color: #fff;
+			}
+
+			#tab li#mark {
+				width: 130px;
+				height: 89px;
+				background: url(img/mark.png);
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: -1;
+			}
+
+			/*banner上面浮层*/
+			.cat_wrap {
+				box-shadow: 1px 1px 2px #bfbcbc;
+				box-shadow: 0 -4px 8px 0 rgba(7, 17, 27, .1), 0 4px 8px 0 rgba(7, 17, 27, .1);
+				background: #fff;
+				width: 180px;
+				margin-top: 10px;
+				position: absolute;
+				z-index: 999;
+				/*top:-30px;*/
+			}
+
+			.cat_wrap .cat_title {
+				width: 192px;
+				height: 50px;
+				line-height: 50px;
+				font-size: 16px;
+				background: url(i/juxing.png) no-repeat;
+				margin-left: -6px;
+				margin-top: -15px;
+				background-size: 100%;
+				color: #fff;
+				text-align: center;
+			}
+
+			.cat_wrap .cat_header {
+				min-height: 450px;
+			}
+
+			.cat_wrap .cat_list div {
+				background: #fff;
+				border-left: 3px solid transparent;
+			}
+
+			.cat_wrap .cat_list div li {
+				float: left;
+				color: #323232;
+				font-size: 14px;
+				margin: 7px 0px;
+			}
+
+			.cat_wrap .cat_list div li:first-child {
+				margin-left: 15px;
+				margin-right: 10px;
+			}
+
+			.cat_wrap .cat_list {
+				cursor: pointer;
+			}
+
+			.cat_wrap .cat_list div.active {
+				width: 177px;
+				padding-left: 1px;
+				position: relative;
+				z-index: 999;
+				border-left: 3px solid #00a1ea;
+				border-top: 1px solid #00a1ea;
+				border-bottom: 1px solid #00a1ea;
+				border-right: none;
+			}
+
+			/*banner浮层滑动显示弹框*/
+			.cat_subcont {
+				display: none;
+			}
+
+			.cat_subcont.active {
+				display: block;
+			}
+
+			.cat_subcont .cat_sublist {
+				position: absolute;
+				z-index: 998;
+				top: 30px;
+				left: 180px;
+				padding-top: 5px;
+				min-height: 394px;
+				width: 740px;
+				background: #fff;
+				border-top: 1px solid #f9f9f9;
+				border-left: 1px solid #00a1ea;
+				border-bottom: 1px solid #00a1ea;
+				border-right: 1px solid #00a1ea;
+			}
+
+			.cat_subcont .cat_sublist .fore1 {
+				width: 740px;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list {
+				padding: 0 20px;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list h3 {
+				padding: 5px;
+				border-bottom: 1px solid #d3d3d3;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list h3 a {
+				font-size: 14px;
+				color: #00a1ea;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list li {
+				float: left;
+				padding: 5px;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list li a {
+				font-size: 12px;
+				color: #333;
+			}
+
+			.cat_subcont .cat_sublist .fore1 .fore_list li a:hover {
+				color: #00a1ea;
+				text-decoration: underline;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			li {
+				list-style: none;
+			}
+
+			#banner {
+				width: 730px;
+				height: 454px;
+				margin: 50px auto;
+				position: relative;
+			}
+
+			#banner .pic {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+
+			#banner .pic ul li {
+				position: absolute;
+				display: none;
+			}
+
+			#banner .tab {
+				width: 148px;
+				height: 20px;
+				position: absolute;
+				bottom: 10px;
+				left: 50%;
+				margin-left: -70px;
+			}
+
+			#banner .tab ul li {
+				width: 18px;
+				height: 18px;
+				background: #666;
+				border-radius: 100%;
+				float: left;
+				margin: 1px 3px;
+				color: #fff;
+				text-align: center;
+				line-height: 18px;
+				font-family: 'Microsoft yahei';
+				font-size: 12px;
+				cursor: pointer;
+			}
+
+			#banner .tab ul li.on {
+				background: #f60;
+			}
+
+			#banner .btn {
+				display: none;
+			}
+
+			#banner .btn div {
+				width: 30px;
+				height: 60px;
+				background: rgba(0, 0, 0, 0.3);
+				text-align: center;
+				line-height: 60px;
+				color: #fff;
+				font-size: 24px;
+				position: absolute;
+				top: 50%;
+				margin-top: -30px;
+				cursor: pointer;
+			}
+
+			#leftBtn {
+				left: 0;
+			}
+
+			#rightBtn {
+				right: 0;
+			}
+
+			/*右边插件*/
+			.daohang {
+				list-style: none;
+				position: absolute;
+				width: 54px;
+				left: 50%;
+				margin-left: 720px;
+				margin-bottom: 200px;
+				bottom: 20px;
+				overflow: hidden;
+				z-index: 2;
+
+			}
+
+			.daohang li {
+				position: relative;
+				width: 48px;
+				height: 48px;
+				background: red;
+				margin-top: 3px;
+				cursor: pointer;
+				overflow: hidden;
+
+			}
+
+			.daohang.li1 {
+				background: url(sprite.png) 0 0;
+			}
+
+			.daohang.daohang .li2 {
+				background: url(sprite.png) 0 -51px;
+			}
+
+			.daohang.li3 {
+				background: url(sprite.png) 0 -102px;
+			}
+
+			.daohang.li4 {
+				background: url(sprite.png) 0 -153px;
+			}
+
+			.daohang.li5 {
+				background: url(sprite.png) 0 -204px;
+			}
+
+			.daohang.li6 {
+				background: url(sprite.png) 0 -255px;
+			}
+
+			.daohang.li7 {
+				background: url(sprite.png) 0 -306px;
+			}
+
+			.daohang a {
+				content: attr(data-text);
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				line-height: 48px;
+				font-size: 12px;
+				font-weight: 700;
+				color: #fff !important;
+				border-radius: 3px;
+				background-color: #18448e;
+				text-decoration: none !important;
+				text-align: center;
+				-webkit-transform-origin: -50% 50%;
+				transform-origin: -50% 50%;
+				-webkit-transform: rotate3d(0, 0, 1, 90deg);
+				transform: rotate3d(0, 0, 1, 90deg);
+				-webkit-transition: -webkit-transform .3s ease-in;
+				transition: transform .3s ease-in;
+				opacity: 0\9;
+				filter: alpha(opacity=0)\9;
+			}
+
+			li:hover a {
+				-webkit-transform: rotate3d(0, 0, 1, 0deg);
+				transform: rotate3d(0, 0, 1, 0deg);
+				-webkit-transition-timing-function: ease-out;
+				transition-timing-function: ease-out;
+			}
+
+			.right {
+				z-index: 1;
+			}
+			
+			/*拖拽相册*/
+			
+						*{ margin:0; padding:0;}
+						body{
+							/*background:#000;*/
+							overflow:hidden;
+						}
+						#perspective{
+							perspective:1000px;
+						}
+						#wrapp{
+							width:120px;  /*133:200  4:6  */
+							height:180px;
+							margin:0 auto;
+							position:relative;
+			
+							/*搭建3D效果必须的两个属性：一个变换风格变3d，一个场景景深800px*/
+							transform-style:preserve-3d;
+							transform:rotateX(-10deg) rotateY(0deg);
+							
+						}
+						#wrapp img{
+							width:100%;
+							height:100%;
+							position:absolute;
+							border-radius:1px;
+							box-shadow:0 0 8px #f9f;
+							transform:rotateY(0deg) translateZ(0px);
+							/*倒影：朝向 偏移 遮盖*//*线性渐变(从哪里开始,开始时候的颜色,结束时候的颜色)*/
+							-webkit-box-reflect:below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%);
+						}
+						#wrapp p{
+							width:1200px;
+							height:1200px;
+							background:-webkit-radial-gradient(center center,600px 600px,rgba(244,23,234,0.2),rgba(0,0,0,0));
+							border-radius:100%;
+							position:absolute;
+							left:50%;
+							top:102%;
+							margin-left:-600px;
+							margin-top:-600px;
+							transform:rotateX(90deg);
+						}
+		
+		</style>
+	</head>
+	<body>
+		
+		<!-- header start -->
+		<div id="header">
+			<div id="h-top">
+				<div class='h-t-shadow1'></div>
+				<div class='h-t-shadow2'></div>
+				<div class="h-t-main">
+					<div class="h-t-m-left">
+						<ul>
+							<li class='l1'>
+								<a href=''><i></i><span>主站</span></a>
+							</li>
+							<li><a href="" title='画友'><span>画友</span></a></li>
+
+							<li class='l3'>
+								<a href="" title='游戏中心'><span>游戏中心</span></a>
+								<div class="hide">
+									<div class="hide-left">
+										<div class="hide-left-top">
+											<a href=''>
+												<p>七周年祝福</p>
+											</a>
+										</div>
+										<div class="hide-left-bot">
+											<ul>
+												<li>
+													<a href="">
+														<div><img src="img/header/top/game/2.png" width='67' height='67' alt="" /></div>
+														<p class="b-dec">ICHU偶</p>
+													</a>
+												</li>
+												<li>
+													<a href="">
+														<div><img src="img/header/top/game/3.png" width='67' height='67' alt="" /></div>
+														<p class="b-dec">战舞幻想</p>
+													</a>
+												</li>
+												<li>
+													<a href="">
+														<div><img src="img/header/top/game/4.png" width='67' height='67' alt="" /></div>
+														<p class="b-dec">刀剑神域</p>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="hide-right">
+										<div class="r-title"><img src="img/header/top/game/title.png" alt="" /></div>
+										<a href="" class="r-ltan">游戏论坛</a>
+										<ul class="r-list">
+											<li><a href="">苍之骑士团</a></li>
+											<li><a href="">幻游猎人</a></li>
+											<li><a href="">命运-冠位指定（Fate/GO）</a></li>
+											<li><a href="">魔法少女小圆</a></li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class='l6'><a href="" title='BML'><i></i><span>BML</span></a></li>
+							<li><a href="" title='直播'><span>直播</span></a></li>
+							<li><select id="sheng" name="sheng">
+									<option value="0">省</option>
+									<option value="1">北京市</option>
+									<option value="2">天津市</option>
+									<option value="3">上海市</option>
+									<option value="4">重庆市</option>
+									<option value="5">河北省</option>
+									<option value="6">山西省</option>
+									<option value="7">内蒙古</option>
+									<option value="8">辽宁省</option>
+									<option value="9">吉林省</option>
+									<option value="10">黑龙江省</option>
+									<option value="11">江苏省</option>
+									<option value="12">浙江省</option>
+									<option value="13">安徽省</option>
+									<option value="14">福建省</option>
+									<option value="15">江西省</option>
+									<option value="16">山东省</option>
+									<option value="17">河南省</option>
+									<option value="18">湖北省</option>
+									<option value="19">湖南省</option>
+									<option value="20">广东省</option>
+									<option value="21">广西</option>
+									<option value="22">海南省</option>
+									<option value="23">四川省</option>
+									<option value="24">贵州省</option>
+									<option value="25">云南省</option>
+									<option value="26">西藏</option>
+									<option value="27">陕西省</option>
+									<option value="28">甘肃省</option>
+									<option value="29">青海省</option>
+									<option value="30">宁夏</option>
+									<option value="31">新疆</option>
+									<option value="32">香港</option>
+									<option value="33">澳门</option>
+									<option value="34">台湾省</option>
+								</select>
+								<select id="shi">
+									<option value="0">市</option>
+								</select>
+								<select id="xian">
+									<option value="0">县</option>
+								</select>
+								<script type="text/javascript" src="areaData.js"></script>
+								<script type="text/javascript">
+									$(function() {
+
+										var sheng = areaData.sheng;
+										var $sheng = $('#sheng');
+										var $shi = $('#shi');
+										var $xian = $('#xian');
+										var shiIndex = 0;
+										for (var i = 0; i < sheng.length; i++) {
+											var $option = $('<option value=' + (i + 1) + '>' + sheng[i] + '</option>');
+											$sheng.append($option);
+										}
+										$sheng.change(function() {
+											shiIndex = this.selectedIndex - 1;
+											if (shiIndex < 0) {
+
+											} else {
+												var shi = areaData.shi['a_' + shiIndex];
+												$shi.html('<option value="0">市</option>');
+												$xian.html('<option value="0">县</option>');
+												for (var i = 0; i < shi.length; i++) {
+													var $option = $('<option value=' + (i + 1) + '>' + shi[i] + '</option>');
+													$shi.append($option);
+												}
+											}
+										});
+										$shi.change(function() {
+											var index = this.selectedIndex - 1;
+											if (index < 0) {
+
+											} else {
+												var xian = areaData.xian['a_' + shiIndex + '_' + index];
+												$xian.html('<option value="0">县</option>');
+												for (var i = 0; i < xian.length; i++) {
+													var $option = $('<option value=' + (i + 1) + '>' + xian[i] + '</option>');
+													$xian.append($option);
+												}
+											}
+										});
+									});
+								</script>
+							</li>
+							<li class='l6'><a href="" title='BML'><i></i><span>BML</span></a></li>
+							<!--<a href="" title='BML'><i></i><span>BML</span></a>-->
+
+						</ul>
+					</div>
+					<div class="h-t-m-right"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- end header-->
+		<!-- banner上面浮层 -->
+		<div class="cat_wrap">
+			<div class="cat_header">
+				<h3 class="cat_title">全部球队</h3>
+				<div class="cat_list">
+					<div class="float for1">
+						<ul class="clearfix">
+							<li>广州恒大</li>
+							<li>北京国安</li>
+						</ul>
+					</div>
+					<div class="float for2">
+						<ul class="clearfix">
+							<li>上海上港</li>
+							<li>上海申花</li>
+						</ul>
+					</div>
+					<div class="float for3">
+						<ul class="clearfix">
+							<li>深圳佳兆业</li>
+							<li>河南建业</li>
+						</ul>
+					</div>
+					<div class="float for4">
+						<ul class="clearfix">
+							<li>天津天海</li>
+							<li>天津泰达</li>
+						</ul>
+					</div>
+					<div class="float for5">
+						<ul class="clearfix">
+							<li>广州富力</li>
+							<li>北京人和</li>
+						</ul>
+					</div>
+					<div class="float for6">
+						<ul class="clearfix">
+							<li>江苏苏宁</li>
+							<li>河北华夏幸福</li>
+						</ul>
+					</div>
+					<div class="float for7">
+						<ul class="clearfix">
+							<li>山东鲁能</li>
+							<li>大连一方</li>
+						</ul>
+					</div>
+					<div class="float for8">
+						<ul class="clearfix">
+							<li>多特蒙德</li>
+							<li>拜仁慕尼黑</li>
+						</ul>
+					</div>
+					<div class="float for9">
+						<ul class="clearfix">
+							<li>巴塞罗那</li>
+							<li>皇家马德里</li>
+						</ul>
+					</div>
+					<div class="float for9">
+						<ul class="clearfix">
+							<li>国际米兰</li>
+							<li>曼联</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<p></p>
+
+			<p></p>
+			<p></p>
+			<!-- banner浮层滑动显示弹框 -->
+			<div class="cat_subcont">
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算1</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算1</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算2</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算2</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算2</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算3</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算3</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算4</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算4</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算5</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算6</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算6</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算7</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算8</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算8</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算9</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算9</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="cat_sublist">
+					<!-- 浮层左边列表 -->
+					<div class="fore1">
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算10</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+						<div class="fore_list">
+							<h3><a href="javascript:void(0);">云计算10</a></h3>
+							<ul class="clearfix">
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云平台》</a></li>
+								<li><a href="javascript:void(0);">《大数据》</a></li>
+								<li><a href="javascript:void(0);">《虚拟化技术》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+								<li><a href="javascript:void(0);">《云计算基础架构》</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script type="text/javascript">
+			//banner左侧内容栏
+			$(function() {
+				var thisTime;
+				//鼠标离开左侧内容栏
+				$('.cat_wrap .cat_list .float').mouseleave(function(even) {
+					thisTime = setTimeout(thisMouseOut, 1000);
+				});
+				//鼠标点击左侧内容栏   滑动出弹层
+				$('.cat_wrap .cat_list .float').mouseenter(function() {
+					$(this).addClass("active").siblings().removeClass("active");
+					clearTimeout(thisTime);
+					var thisUB = $('.cat_wrap .cat_list .float').index($(this));
+					if ($.trim($('.cat_subcont .cat_sublist').eq(thisUB).html()) != "") {
+						$('.cat_subcont').addClass('active');
+						$('.cat_sublist').hide();
+						$('.cat_sublist').eq(thisUB).show();
+					} else {
+						$('.cat_subcont').removeClass('active');
+					}
+				});
+				//函数——执行鼠标离开左侧内容栏的动作
+				function thisMouseOut() {
+					$('.cat_subcont').removeClass('active');
+					$('.cat_wrap .cat_list .float').removeClass('active');
+				}
+				$('.cat_subcont').mouseenter(function() {
+					clearTimeout(thisTime);
+					$('.cat_subcont').addClass('active');
+				});
+				$('.cat_subcont').mouseleave(function() {
+					$('.cat_subcont').removeClass('active');
+					$('.cat_wrap .cat_list .float').removeClass('active');
+				});
+			});
+		</script>
+		<!--轮播图-->
+		<div id="wrap" style="z-index: 1;">
+			<div id="pic">
+				<ul></ul>
+				<div id='btn'>
+					<div id="left"></div>
+					<div id="right"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="tab">
+			<div id='prev' onselectstart='return false'>&lt;</div>
+			<div id='show'>
+				<div>
+					<ul></ul>
+				</div>
+			</div>
+			<div id='next' onselectstart='return false'>&gt;</div>
+
+		</div>
+		<!--右边插件-->
+		<ul class="daohang" style="z-index: 2;">
+			<li class="li1">
+				<a href="">热门商品</a>
+			</li>
+			<li class="li2">
+				<a href="">热词</a>
+			</li>
+			<li class="li3">
+				<a href="">巧克力</a>
+			</li>
+			<li class="li4">
+				<a href="">特价</a>
+			</li>
+			<li class="li5">
+				<a href="">免费领</a>
+			</li>
+			<li class="li6">
+				<a href="">推荐</a>
+			</li>
+
+		</ul>
+		
+
+			
+
+</div>
+
+		</div>
+
+		<script type="text/javascript" src='js/index.js'></script>
+		<script type="text/javascript" src='js/jquery-1.12.1.min.js'></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var $picUl = $('#pic ul');
+			var $picLi = null;
+			var $tabUl = $('#tab ul');
+			var $tabLi = null;
+			var $mark = null;
+			var $next = $('#next');
+			var $prev = $('#prev');
+			var $left = $('#left');
+			var $right = $('#right');
+			var index = 0;
+			init();
+
+			$next.click(function() {
+				var nowmLeft = parseInt($tabUl.css('marginLeft'));
+				var max = $tabLi.length * ($tabLi.width() + 30) - ($('#tab').width() - 30 * 2);
+
+				nowmLeft = nowmLeft - $('#tab').width() - 30 * 2;
+
+				nowmLeft = Math.max(-max, nowmLeft);
+				$tabUl.stop().animate({
+					marginLeft: nowmLeft + 'px'
+				});
+			});
+
+			$prev.click(function() {
+				var nowmLeft = parseInt($tabUl.css('marginLeft'));
+				var min = 0;
+				nowmLeft = nowmLeft + $('#tab').width() - 30 * 2;
+				nowmLeft = Math.min(min, nowmLeft);
+				$tabUl.stop().animate({
+					marginLeft: nowmLeft + 'px'
+				});
+			});
+
+			$left.click(function() {
+				$picLi.eq(index).fadeOut(200);
+				index == 0 ? index = $tabLi.length - 1 : index--;
+				move();
+			});
+			$right.click(function() {
+				$picLi.eq(index).fadeOut(200);
+				index++;
+				index %= $tabLi.length;
+				move();
+			});
+
+			$tabLi.click(function() {
+				$picLi.eq(index).fadeOut(200);
+				index = $(this).index();
+				move();
+			});
+
+			function move() {
+				$mark.css({
+					left: $tabLi.eq(index).position().left - 5 + 'px',
+					top: $tabLi.eq(index).position().top - 9 + 'px'
+				});
+				$picLi.eq(index).fadeIn(200);
+
+				var left = -($tabLi.eq(index).position().left + 20 - ($('#tab').width() - 30 * 2) / 2);
+				var max = $tabLi.length * ($tabLi.width() + 30) - ($('#tab').width() - 30 * 2);
+				var min = 0;
+				left = Math.max(-max, left);
+				left = Math.min(min, left);
+				$tabUl.stop().animate({
+					marginLeft: left + 'px'
+				});
+			};
+
+			function init() {
+				for (var i = 0; i < 22; i++) {
+					var $li = $('<li></li>');
+					var $li1 = $('<li></li>');
+					$picUl.append($li);
+					$tabUl.append($li1);
+					$li.css('backgroundImage', 'url(img/' + (i + 1) + '.jpg)');
+					$li1.css('backgroundImage', 'url(img/' + (i + 1) + '.jpg)');
+				};
+
+				$picLi = $('#pic ul li');
+				$tabLi = $('#tab ul li');
+				$tabUl.append('<li id="mark"></li>');
+				$mark = $('#mark');
+				$picLi[0].style.display = 'block';
+				$mark.css({
+					left: $tabLi.eq(index).position().left - 5 + 'px',
+					top: $tabLi.eq(index).position().top - 9 + 'px'
+				});
+			};
+		</script>
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="js/web.js"></script>
+
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/bootstrap/js/bootstrap.js"></script>
+		<script src="js/main.js"></script>
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="js/web.js"></script>
+		<script type="text/javascript">
+			< /body> < /
+			html >

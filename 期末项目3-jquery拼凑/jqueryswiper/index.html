@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>lucas的糖果屋</title>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+	</head>
+<style>
+	/*右边插件*/
+	.daohang{
+			list-style:none;
+			position: absolute;
+			width: 54px;
+		    left: 50%;
+		    margin-left:650px;
+			margin-top: 40px;
+		    bottom: 20px;	
+		    overflow: hidden;
+			z-index: 2;
+			
+		}
+		 .daohang li{    position: relative;
+			width: 48px;
+			height: 48px;
+			background: red;
+			margin-top:3px;
+	        cursor: pointer;
+	        overflow: hidden;
+	 
+		}
+	.daohang.li1{
+			background: url(sprite.png) 0 0;
+		}
+	.daohang.daohang	.li2{
+			background: url(sprite.png) 0 -51px;
+		}
+	.daohang.li3{
+			background: url(sprite.png) 0 -102px;
+		}
+	.daohang.li4{
+			background: url(sprite.png) 0 -153px;
+		}
+		.daohang.li5{
+			background: url(sprite.png) 0 -204px;
+		}
+		.daohang.li6{
+			background: url(sprite.png) 0 -255px;
+		}
+		.daohang.li7{
+			background: url(sprite.png) 0 -306px;
+		}
+		.daohang a{
+		    content: attr(data-text);
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    line-height: 48px;
+		    font-size: 12px;
+		    font-weight: 700;
+		    color: #fff!important;
+		    border-radius: 3px;
+		    background-color: #18448e;
+		    text-decoration: none!important;
+		    text-align: center;
+		    -webkit-transform-origin: -50% 50%;
+		    transform-origin: -50% 50%;
+		    -webkit-transform: rotate3d(0,0,1,90deg);
+		    transform: rotate3d(0,0,1,90deg);
+		    -webkit-transition: -webkit-transform .3s ease-in;
+		    transition: transform .3s ease-in;
+		    opacity: 0\9;
+		    filter: alpha(opacity=0)\9;
+		}
+		li:hover a{
+			-webkit-transform: rotate3d(0,0,1,0deg);
+		    transform: rotate3d(0,0,1,0deg);
+			-webkit-transition-timing-function: ease-out;
+			transition-timing-function: ease-out;
+		}
+</style>
+	<body>
+		<!--top bar-->
+		<div class="top-bar">
+			<div class="wrap">
+				<div class="top-left">
+					<a href="#">商城首页</a>
+					<a href="#">网站首页</a>
+				</div>
+				<div class="top-right">
+					购买热线(0:00-24:00)：<b>400-888-8888</b>
+				</div>
+			</div>
+		</div>
+		<!--nav-->
+		<div class="nav">
+			<div class="wrap">
+				<a href="#" class="logo">
+					<img src="images/对的时间点.jpg"height="90px";width="130px">
+				</a>
+				<ul class="menu">
+					<li>
+						<a href="#">首页</a>
+					</li>
+					<li>
+						<a href="#">经营理念</a>
+					</li>
+					<li>
+						<a href="#">分店地址</a>
+					</li>
+					<li>
+						<a href="#">经营品种</a>
+					</li>
+					<li>
+						<a href="#">配套服务</a>
+					</li>
+					<li>
+						<a href="#">互动论坛</a>
+					</li>
+					<li>
+						<a href="#">伙伴招募</a>
+					</li>
+				</ul>
+				<div class="search-box">
+					<form action="">
+						<input name="url" class="search-url" value="http://" type="text">&nbsp;
+						<input name="" class="search-btn" value="查询" type="submit">
+					</form>
+				</div>
+			</div>
+		</div>
+		<!--banner-->
+		<div class="banner">
+			<div class="swiper-container gallery-top">
+				<div class="swiper-wrapper"style="z-index: 1;">
+					<a class="swiper-slide" href="#"></a>
+					<a class="swiper-slide" href="#"></a>
+					<a class="swiper-slide" href="#"></a>
+					<a class="swiper-slide" href="#"></a>
+					<a class="swiper-slide" href="#"></a>
+					<a class="swiper-slide" href="#"></a>
+				</div>
+				<!-- Add Pagination -->
+				<div class="wrap pr">
+					<div class="gallery-left pa">
+						<h3>产品服务</h3>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+				<!-- Add Arrows -->
+				<div class="swiper-button-next swiper-button-white"></div>
+				<div class="swiper-button-prev swiper-button-white"></div>
+			<!--右边插件-->
+			  <ul class="daohang" style="z-index: 2;">
+			  	<li class="li1">
+			  			<a href="">热门商品</a>
+			  		</li>
+			  		<li class="li2">
+			  			<a href="">热词</a>
+			  		</li>
+			  		<li class="li3">
+			  			<a href="">巧克力</a>
+			  		</li>
+			  		<li class="li4">
+			  			<a href="">特价</a>
+			  		</li>
+			  		<li class="li5">
+			  			<a href="">免费领</a>
+			  		</li>
+			  		<li class="li6">
+			  			<a href="">推荐</a>
+			  		</li>
+			  		
+			  	</ul>
+			</div>
+
+		</div>
+		<!--banner end-->
+		<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var galleryTop = new Swiper('.gallery-top', {
+				pagination: '.swiper-pagination',
+				nextButton: '.swiper-button-next',
+				prevButton: '.swiper-button-prev',
+				paginationClickable: true,
+				autoplay: 5000,
+				paginationBulletRender: function(index, className) {
+					switch(index) {
+						case 0:
+							name = '糖果';
+							break;
+						case 1:
+							name = '巧克力';
+							break;
+						case 2:
+							name = '棉花糖';
+							break;
+						case 3:
+							name = '小程序购买';
+							break;
+						case 4:
+							name = '售后服务';
+							break;
+						case 5:
+							name = '联系我们';
+							break;
+						default:
+							name = '加入我们';
+					}
+					return '<span class="' + className + '">' + name + '</span>';
+				}
+			});
+		</script>
+	</body>
+
+</html>
